@@ -3,6 +3,7 @@ package ru.blizzed.discogsdb;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.blizzed.discogsdb.model.Error;
 
 import java.io.IOException;
 

@@ -86,6 +86,6 @@ public interface DiscogsDBApiCaller {
      * Issue a search query to our database. This endpoint accepts pagination parameters
      */
     @GET("database/search")
-    Call<Release> search(@Query("key") String key, @Query("secret") String secret, @QueryMap Map<String, String> queryMap);
+    Call<Page> search(@Query("key") String key, @Query("secret") String secret, @QueryMap Map<String, String> queryMap);
 
 }

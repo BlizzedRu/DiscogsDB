@@ -16,6 +16,8 @@
 
 package ru.blizzed.discogsdb;
 
+import ru.blizzed.discogsdb.model.Error;
+
 /**
  * This exception can be thrown when API has been called but response contains an error
  *
