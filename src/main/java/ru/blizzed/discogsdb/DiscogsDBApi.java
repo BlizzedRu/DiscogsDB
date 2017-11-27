@@ -4,15 +4,27 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.blizzed.discogsdb.model.CommunityReleaseRating;
 import ru.blizzed.discogsdb.model.Currency;
+import ru.blizzed.discogsdb.model.Error;
+import ru.blizzed.discogsdb.model.Page;
+import ru.blizzed.discogsdb.model.artist.Artist;
+import ru.blizzed.discogsdb.model.artist.ArtistRelease;
+import ru.blizzed.discogsdb.model.label.Label;
+import ru.blizzed.discogsdb.model.label.LabelRelease;
+import ru.blizzed.discogsdb.model.release.MasterRelease;
 import ru.blizzed.discogsdb.model.release.Release;
+import ru.blizzed.discogsdb.model.release.UserReleaseRating;
+import ru.blizzed.discogsdb.model.release.Version;
+import ru.blizzed.discogsdb.params.Param;
+import ru.blizzed.discogsdb.params.ParamsConverter;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 
 public class DiscogsDBApi {
 
-    private static final String ROOT_URL = "https://api.discogs.com/database/";
+    private static final String ROOT_URL = "https://api.discogs.com/";
 
     private static DiscogsDBApi instance;
 
@@ -40,6 +52,10 @@ public class DiscogsDBApi {
             instance = new DiscogsDBApi(discogsAuthData);
     }
 
+    public static void initialize() {
+        initialize(null);
+    }
+
     /**
      * Checks if you (or someone else) initialized DiscogsDBApi
      *
@@ -60,25 +76,46 @@ public class DiscogsDBApi {
         return new ApiCaller<>(getCaller().getRelease(releaseId, currency.name()));
     }
 
-
-    public boolean hasAuthData() {
-        checkInit();
-        return authData != null;
+    public static ApiCaller<UserReleaseRating> getUserReleaseRating(long releaseId, String username) {
+        return new ApiCaller<>(getCaller().getUserReleaseRating(releaseId, username));
     }
 
-    public DiscogsAuthData getAuthData() {
-        checkInit();
-        return instance.authData;
+    public static ApiCaller<CommunityReleaseRating> getCommunityReleaseRating(long releaseId) {
+        return new ApiCaller<>(getCaller().getCommunityReleaseRating(releaseId));
     }
 
-    /**
-     * Returns a full URL to the SongKick API service as {@link String}
-     *
-     * @return full URL to SongKick API
-     */
-    public String getRootUrl() {
-        checkInit();
-        return ROOT_URL;
+    public static ApiCaller<Page<MasterRelease>> getMasterRelease(long masterId) {
+        return new ApiCaller<>(getCaller().getMasterRelease(masterId));
+    }
+
+    public static ApiCaller<Version> getMasterReleaseVersions(long releaseId, Param... params) {
+        return new ApiCaller<>(getCaller().getMasterReleaseVersions(releaseId, ParamsConverter.asMap(params)));
+    }
+
+    public static ApiCaller<Artist> getArtist(long artistId) {
+        return new ApiCaller<>(getCaller().getArtist(artistId));
+    }
+
+    public static ApiCaller<Page<ArtistRelease>> getArtistReleases(long artistId, Param... params) {
+        return new ApiCaller<>(getCaller().getArtistReleases(artistId, ParamsConverter.asMap(params)));
+    }
+
+    public static ApiCaller<Label> getLabel(long labelId) {
+        return new ApiCaller<>(getCaller().getLabel(labelId));
+    }
+
+    public static ApiCaller<Page<LabelRelease>> getLabelReleases(long labelId, Param... params) {
+        return new ApiCaller<>(getCaller().getLabelReleases(labelId, ParamsConverter.asMap(params)));
+    }
+
+    public static ApiCaller search() {
+        if (!hasAuthData()) throw new RuntimeException("You must set authentication data to use search method.");
+        return new ApiCaller<>(getCaller().search(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), ParamsConverter.asMap(null)));
+    }
+
+
+    public void setAuthData(DiscogsAuthData authData) {
+        this.authData = authData;
     }
 
     Error parseError(ResponseBody responseBody) throws IOException {
@@ -86,9 +123,19 @@ public class DiscogsDBApi {
         return converter.convert(responseBody);
     }
 
+    private static DiscogsAuthData getAuthData() {
+        checkInit();
+        return instance.authData;
+    }
+
     private static DiscogsDBApiCaller getCaller() {
         checkInit();
         return instance.caller;
+    }
+
+    private static boolean hasAuthData() {
+        checkInit();
+        return instance.authData != null;
     }
 
     private static void checkInit() {
