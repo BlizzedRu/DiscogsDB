@@ -21,33 +21,33 @@ public class SearchPage extends PaginatedResult {
     }
 
     public List<BaseSearchResult> getAllLabels() {
-        return results.keySet()
-                .stream()
-                .filter(v -> v.getType().equals(Type.LABEL))
-                .collect(Collectors.toList());
+        return retrieveBasesByType(Type.LABEL);
     }
 
     public List<BaseSearchResult> getAllArtists() {
-        return results.keySet()
-                .stream()
-                .filter(v -> v.getType().equals(Type.ARTIST))
-                .collect(Collectors.toList());
+        return retrieveBasesByType(Type.ARTIST);
     }
 
     public List<ReleaseSearchResult> getAllReleases() {
-        List<ReleaseSearchResult> releases = new ArrayList<>();
-        results.keySet()
-                .stream()
-                .filter(v -> v.getType().equals(Type.RELEASE))
-                .forEach(r -> releases.add((ReleaseSearchResult) r));
-        return releases;
+        return retrieveReleasesByType(Type.RELEASE);
     }
 
     public List<ReleaseSearchResult> getAllMasters() {
+        return retrieveReleasesByType(Type.MASTER);
+    }
+
+    private List<BaseSearchResult> retrieveBasesByType(Type type) {
+        return results.keySet()
+                .stream()
+                .filter(v -> v.getType().equals(type))
+                .collect(Collectors.toList());
+    }
+
+    private List<ReleaseSearchResult> retrieveReleasesByType(Type type) {
         List<ReleaseSearchResult> releases = new ArrayList<>();
         results.keySet()
                 .stream()
-                .filter(v -> v.getType().equals(Type.MASTER))
+                .filter(v -> v.getType().equals(type))
                 .forEach(r -> releases.add((ReleaseSearchResult) r));
         return releases;
     }
