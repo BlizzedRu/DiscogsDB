@@ -52,7 +52,7 @@ dependencies {
 
 #### Initialization
 
-* You're going to use `search` method
+* You're not going to use `search` method
 
 ```java 
 DiscogsDB.initialize();
@@ -98,18 +98,18 @@ long kornId = page.getContent().get(0).getId();     // Congrats!
 
 
 #### Callbacks
-That's nice! Now you have Korn's ID in Discogs so you can get all their names variations. 
-You can receive callbacks two ways:
+That's nice! Now you have Korn's ID in Discogs so you can get all their name variations. 
+You can receive callbacks in two ways:
 
 * Catching exceptions
 ```java 
 try {
-    DiscogsDBApi.getArtist(kornId).execute().getNameVariations().forEach(System.out::println);*/
+    DiscogsDBApi.getArtist(kornId).execute().getNameVariations().forEach(System.out::println);
 } catch (DiscogsDBCallException | DiscogsDBErrorException e) {
     // Handle error
 } 
 ```
-* Pass a listener
+* With listener
 ```java 
 DiscogsDBApi.getArtist(kornId).execute(new DiscogsDBCaller.Listener<Artist>() {
     @Override
@@ -128,7 +128,7 @@ DiscogsDBApi.getArtist(kornId).execute(new DiscogsDBCaller.Listener<Artist>() {
     }
 });
 ```
-*Tip:* you can override not all callback methods
+**Tip:** you can override not all callback methods
 
 #### Requests cancelling
 It goes without saying that you can also cancel request immediately if needs
@@ -154,4 +154,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[doc]: www.discogs.com/developers/#page:database
+[doc]: http://www.discogs.com/developers/#page:database
