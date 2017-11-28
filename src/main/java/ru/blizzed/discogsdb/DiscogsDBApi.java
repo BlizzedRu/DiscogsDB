@@ -68,64 +68,64 @@ public class DiscogsDBApi {
 
     /** Methods **/
 
-    public static ApiCaller<Release> getRelease(long releaseId) {
-        return new ApiCaller<>(getCaller().getRelease(releaseId));
+    public static DiscogsDBCaller<Release> getRelease(long releaseId) {
+        return new DiscogsDBCaller<>(getCaller().getRelease(releaseId));
     }
 
-    public static ApiCaller<Release> getRelease(long releaseId, Currency currency) {
-        return new ApiCaller<>(getCaller().getRelease(releaseId, currency.name()));
+    public static DiscogsDBCaller<Release> getRelease(long releaseId, Currency currency) {
+        return new DiscogsDBCaller<>(getCaller().getRelease(releaseId, currency.name()));
     }
 
-    public static ApiCaller<UserReleaseRating> getUserReleaseRating(long releaseId, String username) {
-        return new ApiCaller<>(getCaller().getUserReleaseRating(releaseId, username));
+    public static DiscogsDBCaller<UserReleaseRating> getUserReleaseRating(long releaseId, String username) {
+        return new DiscogsDBCaller<>(getCaller().getUserReleaseRating(releaseId, username));
     }
 
-    public static ApiCaller<CommunityReleaseRating> getCommunityReleaseRating(long releaseId) {
-        return new ApiCaller<>(getCaller().getCommunityReleaseRating(releaseId));
+    public static DiscogsDBCaller<CommunityReleaseRating> getCommunityReleaseRating(long releaseId) {
+        return new DiscogsDBCaller<>(getCaller().getCommunityReleaseRating(releaseId));
     }
 
-    public static ApiCaller<Page<MasterRelease>> getMasterRelease(long masterId) {
-        return new ApiCaller<>(getCaller().getMasterRelease(masterId));
+    public static DiscogsDBCaller<Page<MasterRelease>> getMasterRelease(long masterId) {
+        return new DiscogsDBCaller<>(getCaller().getMasterRelease(masterId));
     }
 
-    public static ApiCaller<Version> getMasterReleaseVersions(long releaseId, Param... params) {
-        return new ApiCaller<>(getCaller().getMasterReleaseVersions(releaseId, ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<Version> getMasterReleaseVersions(long releaseId, Param... params) {
+        return new DiscogsDBCaller<>(getCaller().getMasterReleaseVersions(releaseId, ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller<Artist> getArtist(long artistId) {
-        return new ApiCaller<>(getCaller().getArtist(artistId));
+    public static DiscogsDBCaller<Artist> getArtist(long artistId) {
+        return new DiscogsDBCaller<>(getCaller().getArtist(artistId));
     }
 
-    public static ApiCaller<Page<ArtistRelease>> getArtistReleases(long artistId, Param... params) {
-        return new ApiCaller<>(getCaller().getArtistReleases(artistId, ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<Page<ArtistRelease>> getArtistReleases(long artistId, Param... params) {
+        return new DiscogsDBCaller<>(getCaller().getArtistReleases(artistId, ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller<Label> getLabel(long labelId) {
-        return new ApiCaller<>(getCaller().getLabel(labelId));
+    public static DiscogsDBCaller<Label> getLabel(long labelId) {
+        return new DiscogsDBCaller<>(getCaller().getLabel(labelId));
     }
 
-    public static ApiCaller<Page<LabelRelease>> getLabelReleases(long labelId, Param... params) {
-        return new ApiCaller<>(getCaller().getLabelReleases(labelId, ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<Page<LabelRelease>> getLabelReleases(long labelId, Param... params) {
+        return new DiscogsDBCaller<>(getCaller().getLabelReleases(labelId, ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller<SearchPage> search(Param... params) {
-        return new ApiCaller<>(getCaller().search(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<SearchPage> search(Param... params) {
+        return new DiscogsDBCaller<>(getCaller().search(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller<Page<BaseSearchResult>> searchArtist(Param... params) {
-        return new ApiCaller<>(getCaller().searchArtist(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.ARTIST.lower(), ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<Page<BaseSearchResult>> searchArtist(Param... params) {
+        return new DiscogsDBCaller<>(getCaller().searchArtist(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.ARTIST.lower(), ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller<Page<BaseSearchResult>> searchLabel(Param... params) {
-        return new ApiCaller<>(getCaller().searchLabel(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.LABEL.lower(), ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<Page<BaseSearchResult>> searchLabel(Param... params) {
+        return new DiscogsDBCaller<>(getCaller().searchLabel(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.LABEL.lower(), ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller<Page<ReleaseSearchResult>> searchRelease(Param... params) {
-        return new ApiCaller<>(getCaller().searchRelease(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.RELEASE.lower(), ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<Page<ReleaseSearchResult>> searchRelease(Param... params) {
+        return new DiscogsDBCaller<>(getCaller().searchRelease(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.RELEASE.lower(), ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller<Page<ReleaseSearchResult>> searchMaster(Param... params) {
-        return new ApiCaller<>(getCaller().searchMaster(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.MASTER.lower(), ParamsConverter.asMap(params)));
+    public static DiscogsDBCaller<Page<ReleaseSearchResult>> searchMaster(Param... params) {
+        return new DiscogsDBCaller<>(getCaller().searchMaster(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.MASTER.lower(), ParamsConverter.asMap(params)));
     }
 
 

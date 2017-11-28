@@ -7,31 +7,33 @@ import ru.blizzed.discogsdb.model.Error;
 
 import java.io.IOException;
 
-public final class ApiCaller<ResultType> {
+public final class DiscogsDBCaller<ResultType> {
 
     public interface Listener<ResultType> {
-        default void onComplete(ResultType result, ApiCaller<ResultType> apiCaller) {
+        default void onComplete(ResultType result, DiscogsDBCaller<ResultType> discogsDBCaller) {
         }
-        default void onError(Error error, ApiCaller<ResultType> apiCaller) {
+
+        default void onError(Error error, DiscogsDBCaller<ResultType> discogsDBCaller) {
         }
-        default void onFailure(ApiCallException e, ApiCaller<ResultType> apiCaller) {
+
+        default void onFailure(DiscogsDBCallException e, DiscogsDBCaller<ResultType> discogsDBCaller) {
         }
     }
 
     private Call<ResultType> call;
 
-    public ApiCaller(Call<ResultType> call) {
+    public DiscogsDBCaller(Call<ResultType> call) {
         this.call = call;
     }
 
-    public ResultType execute() throws ApiCallException, ApiErrorException {
+    public ResultType execute() throws DiscogsDBCallException, DiscogsDBErrorException {
         try {
             Response<ResultType> response = call.execute();
             if (response.isSuccessful())
                 return response.body();
-            else throw new ApiErrorException(parseError(response));
+            else throw new DiscogsDBErrorException(parseError(response));
         } catch (IOException e) {
-            throw new ApiCallException(e);
+            throw new DiscogsDBCallException(e);
         }
     }
 
@@ -39,19 +41,19 @@ public final class ApiCaller<ResultType> {
         call.enqueue(new Callback<ResultType>() {
             @Override
             public void onResponse(Call<ResultType> call, Response<ResultType> response) {
-                if (response.isSuccessful()) listener.onComplete(response.body(), ApiCaller.this);
+                if (response.isSuccessful()) listener.onComplete(response.body(), DiscogsDBCaller.this);
                 else  {
                     try {
-                        listener.onError(parseError(response), ApiCaller.this);
+                        listener.onError(parseError(response), DiscogsDBCaller.this);
                     } catch (IOException e) {
-                        listener.onFailure(new ApiCallException(e), ApiCaller.this);
+                        listener.onFailure(new DiscogsDBCallException(e), DiscogsDBCaller.this);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResultType> call, Throwable throwable) {
-                listener.onFailure(new ApiCallException(throwable), ApiCaller.this);
+                listener.onFailure(new DiscogsDBCallException(throwable), DiscogsDBCaller.this);
             }
         });
     }

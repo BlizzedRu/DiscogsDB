@@ -16,16 +16,22 @@
 
 package ru.blizzed.discogsdb;
 
-import java.io.IOException;
+import ru.blizzed.discogsdb.model.Error;
 
 /**
- * This exception can be thrown when call to API cannot be established
+ * This exception can be thrown when API has been called but response contains an error
  *
  * @author BlizzedRu
  */
-public class ApiCallException extends IOException {
+public class DiscogsDBErrorException extends Exception {
 
-    public ApiCallException(Throwable cause) {
-        super(cause);
+    private Error error;
+
+    public DiscogsDBErrorException(Error error) {
+        this.error = error;
+    }
+
+    public Error getError() {
+        return error;
     }
 }
