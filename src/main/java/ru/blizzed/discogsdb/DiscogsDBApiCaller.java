@@ -7,6 +7,7 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import ru.blizzed.discogsdb.model.CommunityReleaseRating;
 import ru.blizzed.discogsdb.model.Page;
+import ru.blizzed.discogsdb.model.SearchPage;
 import ru.blizzed.discogsdb.model.artist.Artist;
 import ru.blizzed.discogsdb.model.artist.ArtistRelease;
 import ru.blizzed.discogsdb.model.label.Label;
@@ -15,6 +16,8 @@ import ru.blizzed.discogsdb.model.release.MasterRelease;
 import ru.blizzed.discogsdb.model.release.Release;
 import ru.blizzed.discogsdb.model.release.UserReleaseRating;
 import ru.blizzed.discogsdb.model.release.Version;
+import ru.blizzed.discogsdb.model.search.BaseSearchResult;
+import ru.blizzed.discogsdb.model.search.ReleaseSearchResult;
 
 import java.util.Map;
 
@@ -86,6 +89,18 @@ public interface DiscogsDBApiCaller {
      * Issue a search query to our database. This endpoint accepts pagination parameters
      */
     @GET("database/search")
-    Call<Page> search(@Query("key") String key, @Query("secret") String secret, @QueryMap Map<String, String> queryMap);
+    Call<SearchPage> search(@Query("key") String key, @Query("secret") String secret, @QueryMap Map<String, String> queryMap);
+
+    @GET("database/search")
+    Call<Page<BaseSearchResult>> searchArtist(@Query("key") String key, @Query("secret") String secret, @Query("type") String type, @QueryMap Map<String, String> queryMap);
+
+    @GET("database/search")
+    Call<Page<BaseSearchResult>> searchLabel(@Query("key") String key, @Query("secret") String secret, @Query("type") String type, @QueryMap Map<String, String> queryMap);
+
+    @GET("database/search")
+    Call<Page<ReleaseSearchResult>> searchRelease(@Query("key") String key, @Query("secret") String secret, @Query("type") String type, @QueryMap Map<String, String> queryMap);
+
+    @GET("database/search")
+    Call<Page<ReleaseSearchResult>> searchMaster(@Query("key") String key, @Query("secret") String secret, @Query("type") String type, @QueryMap Map<String, String> queryMap);
 
 }

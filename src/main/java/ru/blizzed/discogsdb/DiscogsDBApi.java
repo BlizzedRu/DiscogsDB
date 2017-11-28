@@ -4,10 +4,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.blizzed.discogsdb.model.CommunityReleaseRating;
-import ru.blizzed.discogsdb.model.Currency;
+import ru.blizzed.discogsdb.model.*;
 import ru.blizzed.discogsdb.model.Error;
-import ru.blizzed.discogsdb.model.Page;
 import ru.blizzed.discogsdb.model.artist.Artist;
 import ru.blizzed.discogsdb.model.artist.ArtistRelease;
 import ru.blizzed.discogsdb.model.label.Label;
@@ -16,6 +14,8 @@ import ru.blizzed.discogsdb.model.release.MasterRelease;
 import ru.blizzed.discogsdb.model.release.Release;
 import ru.blizzed.discogsdb.model.release.UserReleaseRating;
 import ru.blizzed.discogsdb.model.release.Version;
+import ru.blizzed.discogsdb.model.search.BaseSearchResult;
+import ru.blizzed.discogsdb.model.search.ReleaseSearchResult;
 import ru.blizzed.discogsdb.params.Param;
 import ru.blizzed.discogsdb.params.ParamsConverter;
 
@@ -108,9 +108,24 @@ public class DiscogsDBApi {
         return new ApiCaller<>(getCaller().getLabelReleases(labelId, ParamsConverter.asMap(params)));
     }
 
-    public static ApiCaller search() {
-        if (!hasAuthData()) throw new RuntimeException("You must set authentication data to use search method.");
-        return new ApiCaller<>(getCaller().search(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), ParamsConverter.asMap(null)));
+    public static ApiCaller<SearchPage> search(Param... params) {
+        return new ApiCaller<>(getCaller().search(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), ParamsConverter.asMap(params)));
+    }
+
+    public static ApiCaller<Page<BaseSearchResult>> searchArtist(Param... params) {
+        return new ApiCaller<>(getCaller().searchArtist(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.ARTIST.lower(), ParamsConverter.asMap(params)));
+    }
+
+    public static ApiCaller<Page<BaseSearchResult>> searchLabel(Param... params) {
+        return new ApiCaller<>(getCaller().searchLabel(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.LABEL.lower(), ParamsConverter.asMap(params)));
+    }
+
+    public static ApiCaller<Page<ReleaseSearchResult>> searchRelease(Param... params) {
+        return new ApiCaller<>(getCaller().searchRelease(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.RELEASE.lower(), ParamsConverter.asMap(params)));
+    }
+
+    public static ApiCaller<Page<ReleaseSearchResult>> searchMaster(Param... params) {
+        return new ApiCaller<>(getCaller().searchMaster(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.MASTER.lower(), ParamsConverter.asMap(params)));
     }
 
 
@@ -125,6 +140,7 @@ public class DiscogsDBApi {
 
     private static DiscogsAuthData getAuthData() {
         checkInit();
+        checkAuth();
         return instance.authData;
     }
 
@@ -140,6 +156,10 @@ public class DiscogsDBApi {
 
     private static void checkInit() {
         if (!isInitialized()) throw new RuntimeException("DiscogsDBApi must be initialized first.");
+    }
+
+    private static void checkAuth() {
+        if (!hasAuthData()) throw new RuntimeException("You must set authentication data to use search method.");
     }
 
 }

@@ -1,10 +1,8 @@
 package ru.blizzed.discogsdb.params;
 
-public class TypeParam extends EnumParam<TypeParam.Type> {
+import ru.blizzed.discogsdb.model.Type;
 
-    public enum Type {
-        RELEASE, MASTER, ARTIST, LABEL
-    }
+public class TypeParam extends EnumParam<Type> {
 
     public TypeParam() {
         super("type");

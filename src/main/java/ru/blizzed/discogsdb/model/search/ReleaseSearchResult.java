@@ -4,13 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ReleaseSearchResult {
+public class ReleaseSearchResult extends BaseSearchResult {
 
     @SerializedName("style")
     private List<String> styles;
-
-    @SerializedName("thumb")
-    private String thumbnail;
 
     @SerializedName("format")
     private List<String> formats;
@@ -19,8 +16,6 @@ public class ReleaseSearchResult {
 
     @SerializedName("barcode")
     private List<String> barcodes;
-
-    private String uri;
 
     @SerializedName("label")
     private List<String> labels;
@@ -33,21 +28,10 @@ public class ReleaseSearchResult {
     @SerializedName("genre")
     private List<String> genres;
 
-    private String title;
-
-    @SerializedName("resource_url")
-    private String resourceUrl;
-
     private Community community;
-
-    private long id;
 
     public List<String> getStyles() {
         return styles;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
     }
 
     public List<String> getFormats() {
@@ -60,10 +44,6 @@ public class ReleaseSearchResult {
 
     public List<String> getBarcodes() {
         return barcodes;
-    }
-
-    public String getUri() {
-        return uri;
     }
 
     public List<String> getLabels() {
@@ -80,18 +60,6 @@ public class ReleaseSearchResult {
 
     public List<String> getGenres() {
         return genres;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getResourceUrl() {
-        return resourceUrl;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public static class Community {

@@ -30,7 +30,7 @@ public final class DiscogsDBParams {
     public static final Param<Integer> PER_PAGE = new Param<>("per_page");
     public static final SortParam SORT = new SortParam();
     public static final SortOrderParam SORT_ORDER = new SortOrderParam();
-    public static final SortOrderParam TYPE = new SortOrderParam();
+    public static final TypeParam TYPE = new TypeParam();
     public static final Param<String> TITLE = new Param<>("title");
     public static final Param<String> RELEASE_TITLE = new Param<>("release_title");
     public static final Param<String> CREDIT = new Param<>("credit");
@@ -47,5 +47,6 @@ public final class DiscogsDBParams {
     public static final Param<String> TRACK = new Param<>("track");
     public static final Param<String> SUBMITTER = new Param<>("submitter");
     public static final Param<String> CONTRIBUTOR = new Param<>("contributor");
+    public static final Param<String> QUERY = new Param<>("q");
 
 }

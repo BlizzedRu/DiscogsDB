@@ -1,8 +1,9 @@
 package ru.blizzed.discogsdb.model.search;
 
 import com.google.gson.annotations.SerializedName;
+import ru.blizzed.discogsdb.model.Type;
 
-public class LabelSearchResult {
+public class BaseSearchResult {
 
     @SerializedName("thumb")
     private String thumbnail;
@@ -15,6 +16,8 @@ public class LabelSearchResult {
     private String resourceUrl;
 
     private long id;
+
+    private Type type;
 
     public String getThumbnail() {
         return thumbnail;
@@ -36,4 +39,7 @@ public class LabelSearchResult {
         return id;
     }
 
+    public Type getType() {
+        return type;
+    }
 }
