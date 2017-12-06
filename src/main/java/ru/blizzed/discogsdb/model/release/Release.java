@@ -1,109 +1,125 @@
 
+/*
+ * Copyright (c) 2017 BlizzedRu (Ivan Vlasov)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ru.blizzed.discogsdb.model.release;
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
-import ru.blizzed.discogsdb.model.*;
+import ru.blizzed.discogsdb.model.Image;
+
+import java.util.List;
 
 public class Release {
 
     @SerializedName("title")
     private String title;
-    
+
     @SerializedName("id")
     private long id;
-    
+
     @SerializedName("artists")
     private List<SimpleArtist> artists;
-    
+
     @SerializedName("data_quality")
     private String dataQuality;
-    
+
     @SerializedName("thumb")
     private String thumb;
-    
+
     @SerializedName("community")
     private Community community;
-    
+
     @SerializedName("companies")
     private List<Company> companies;
-    
+
     @SerializedName("country")
     private String country;
-    
+
     @SerializedName("date_added")
     private String dateAdded;
-    
+
     @SerializedName("date_changed")
     private String dateChanged;
-    
+
     @SerializedName("estimated_weight")
     private int estimatedWeight;
-    
+
     @SerializedName("extraartists")
     private List<ExtraArtist> extraArtists;
-    
+
     @SerializedName("format_quantity")
     private int formatQuantity;
-    
+
     @SerializedName("formats")
     private List<Format> formats;
-    
+
     @SerializedName("genres")
     private List<String> genres;
-    
+
     @SerializedName("identifiers")
     private List<Identifier> identifiers;
-    
+
     @SerializedName("images")
     private List<Image> images;
-    
+
     @SerializedName("labels")
     private List<Label> labels;
-    
+
     @SerializedName("lowest_price")
     private double lowestPrice;
-    
+
     @SerializedName("master_id")
     private long masterId;
-    
+
     @SerializedName("master_url")
     private String masterUrl;
-    
+
     @SerializedName("notes")
     private String notes;
-    
+
     @SerializedName("num_for_sale")
     private int numForSale;
-    
+
     @SerializedName("released")
     private String released;
-    
+
     @SerializedName("released_formatted")
     private String releasedFormatted;
-    
+
     @SerializedName("resource_url")
     private String resourceUrl;
-    
+
     @SerializedName("series")
     private List<Object> series;
-    
+
     @SerializedName("status")
     private String status;
-    
+
     @SerializedName("styles")
     private List<String> styles;
-    
+
     @SerializedName("tracklist")
     private List<Track> tracks;
-    
+
     @SerializedName("uri")
     private String uri;
-    
+
     @SerializedName("videos")
     private List<Video> videos;
-    
+
     @SerializedName("year")
     private int year;
 
