@@ -12,8 +12,6 @@ Full list of methods available in [Discogs's Database Documentation][doc]
 
 ## Installing
 
-**Temporarily unavailable**
-
 #### Maven
 
 In your pom.xml inside the *\<dependencies>* tag
@@ -23,7 +21,7 @@ In your pom.xml inside the *\<dependencies>* tag
     <dependency>
         <groupId>ru.blizzed</groupId>
         <artifactId>discogsdb</artifactId>
-        <version>1.0.0</version>
+        <version>1.0</version>
     </dependency>
 </dependencies>
 ```
@@ -36,7 +34,7 @@ In your build.gradle file inside the *dependencies* section
 ``` 
 dependencies {
    ...
-   implementation 'ru.blizzed:discogsdb:1.0.0'
+   implementation 'ru.blizzed:discogsdb:1.0'
 }
 ```
   
@@ -44,7 +42,7 @@ dependencies {
 ``` 
 dependencies {
     ...
-    compile 'ru.blizzed:discogsdb:1.0.0'
+    compile 'ru.blizzed:discogsdb:1.0'
 }
 ```
   
