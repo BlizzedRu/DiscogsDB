@@ -53,13 +53,13 @@ dependencies {
 * You're not going to use `search` method
 
 ```java 
-DiscogsDB.initialize();
+DiscogsDBApi.initialize();
 ```
 
 * You are planned to use `search` method
 
 ```java 
-DiscogsDB.initialize(new DiscogsAuthData("your-consumer-key", "your-consumer-secret"));
+DiscogsDBApi.initialize(new DiscogsAuthData("your-consumer-key", "your-consumer-secret"));
 ```
 
 #### Building and executing requests
