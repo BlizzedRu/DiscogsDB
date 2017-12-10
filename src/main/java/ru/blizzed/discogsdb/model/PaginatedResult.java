@@ -31,7 +31,7 @@ public class PaginatedResult {
         @SerializedName("per_page")
         private int perPage;
 
-        @SerializedName("itemsCount")
+        @SerializedName(value = "itemsCount", alternate = "items")
         private int itemsCount;
 
         @SerializedName("page")
@@ -40,7 +40,7 @@ public class PaginatedResult {
         @SerializedName("urls")
         private Urls urls;
 
-        @SerializedName("pagesCount")
+        @SerializedName(value = "pagesCount", alternate = "pages")
         private int pagesCount;
 
         public int getPerPage() {
