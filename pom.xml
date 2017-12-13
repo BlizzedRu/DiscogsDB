@@ -22,7 +22,7 @@
 
     <groupId>ru.blizzed</groupId>
     <artifactId>discogsdb</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
     <name>OpenLastFM</name>
     <description>Simple Java library for Discogs's Database API</description>

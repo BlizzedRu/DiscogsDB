@@ -16,6 +16,9 @@
 
 package ru.blizzed.discogsdb;
 
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -51,10 +54,27 @@ public class DiscogsDBApi {
     private DiscogsDBApi(DiscogsAuthData authData) {
         this.authData = authData;
 
-        retrofit = new Retrofit.Builder()
+        Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(ROOT_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .addConverterFactory(GsonConverterFactory.create());
+
+        if (authData != null) {
+            OkHttpClient httpClient = new OkHttpClient.Builder()
+                    .addInterceptor((chain -> {
+                        Request request = chain.request();
+                        HttpUrl url = request.url().newBuilder()
+                                .addQueryParameter("key", authData.getConsumerKey())
+                                .addQueryParameter("secret", authData.getConsumerSecret())
+                                .build();
+                        request = request.newBuilder().url(url).build();
+                        return chain.proceed(request);
+                    }))
+                    .build();
+
+            builder.client(httpClient);
+        }
+
+        retrofit = builder.build();
         caller = retrofit.create(DiscogsDBApiCaller.class);
     }
 
@@ -144,10 +164,6 @@ public class DiscogsDBApi {
         return new DiscogsDBCaller<>(getCaller().searchMaster(getAuthData().getConsumerKey(), getAuthData().getConsumerSecret(), Type.MASTER.lower(), ParamsConverter.asMap(params)));
     }
 
-
-    public void setAuthData(DiscogsAuthData authData) {
-        this.authData = authData;
-    }
 
     Error parseError(ResponseBody responseBody) throws IOException {
         Converter<ResponseBody, Error> converter = retrofit.responseBodyConverter(Error.class, new Annotation[0]);
