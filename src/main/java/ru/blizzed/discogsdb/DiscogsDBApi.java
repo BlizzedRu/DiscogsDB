@@ -100,11 +100,11 @@ public class DiscogsDBApi {
         return new DiscogsDBCaller<>(getCaller().getCommunityReleaseRating(releaseId));
     }
 
-    public static DiscogsDBCaller<Page<MasterRelease>> getMasterRelease(long masterId) {
+    public static DiscogsDBCaller<MasterRelease> getMasterRelease(long masterId) {
         return new DiscogsDBCaller<>(getCaller().getMasterRelease(masterId));
     }
 
-    public static DiscogsDBCaller<Version> getMasterReleaseVersions(long releaseId, Param... params) {
+    public static DiscogsDBCaller<Page<Version>> getMasterReleaseVersions(long releaseId, Param... params) {
         return new DiscogsDBCaller<>(getCaller().getMasterReleaseVersions(releaseId, ParamsConverter.asMap(params)));
     }
 

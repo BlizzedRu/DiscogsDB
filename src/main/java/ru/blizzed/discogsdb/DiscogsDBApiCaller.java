@@ -68,13 +68,13 @@ public interface DiscogsDBApiCaller {
      * have a “main release” which is often the chronologically earliest.
      */
     @GET("masters/{master_id}")
-    Call<Page<MasterRelease>> getMasterRelease(@Path("master_id") long masterId);
+    Call<MasterRelease> getMasterRelease(@Path("master_id") long masterId);
 
     /**
      * Retrieves a list of all Releases that are versions of this master. Accepts Pagination parameters.
      */
     @GET("masters/{master_id}/versions")
-    Call<Version> getMasterReleaseVersions(@Path("master_id") long masterId, @QueryMap Map<String, String> queryMap);
+    Call<Page<Version>> getMasterReleaseVersions(@Path("master_id") long masterId, @QueryMap Map<String, String> queryMap);
 
     /**
      * The Artist resource represents a person in the Discogs database who contributed to a Release in some capacity.
