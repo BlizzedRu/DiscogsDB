@@ -24,7 +24,7 @@
     <artifactId>discogsdb</artifactId>
     <version>1.0.3</version>
     <packaging>jar</packaging>
-    <name>OpenLastFM</name>
+    <name>DiscogsDB</name>
     <description>Simple Java library for Discogs's Database API</description>
     <url>https://github.com/BlizzedRu/DiscogsDB</url>
 
